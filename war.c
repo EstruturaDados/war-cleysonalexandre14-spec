@@ -33,6 +33,7 @@
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
 int main() {
     // 1. Configuração Inicial (Setup):
+    printf("Olá Mundo, no Codespace\n");
     // - Define o locale para português.
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
     // - Aloca a memória para o mapa do mundo e verifica se a alocação foi bem-sucedida.
