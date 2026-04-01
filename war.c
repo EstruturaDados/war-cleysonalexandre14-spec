@@ -70,8 +70,96 @@ int main() {
     //   - Opção 0: Encerra o jogo.
     // - Pausa a execução para que o jogador possa ler os resultados antes da próxima rodada.
 
+    // --- Laço Principal do menu ---
+    do {
+
+        // Exibe o menu de opções.
+        printf("===================================================\n");
+        printf("     DESAFIO WAR - NOVATO\n");
+        printf("===================================================\n");
+        printf("1 - Cadastrar novo livro\n");
+        printf("2 - Listar todos os livros\n");
+        printf("0 - Sair\n");
+        printf("---------------------------------------------------\n");
+        printf("Escolha uma opcao: ");
+
+    // Lê a opção do usuário.
+        scanf("%d", &opcao);
+        limparBufferEntrada(); // Limpa o '\n' deixado pelo scanf.
+
+        // --- Processamento da Opção ---
+        switch (opcao) {
+            case 1: // Cadastro de Livro
+                printf("--- Cadastro de Novo Livro ---\n\n");
+
+                if (totalLivros < MAX_LIVROS) {
+                    printf("Digite o nome do livro: ");
+                    fgets(biblioteca[totalLivros].nome, TAM_STRING, stdin);
+
+                    printf("Digite o autor: ");
+                    fgets(biblioteca[totalLivros].autor, TAM_STRING, stdin);
+
+                    printf("Digite a editora: ");
+                    fgets(biblioteca[totalLivros].editora, TAM_STRING, stdin);
+
+                    biblioteca[totalLivros].nome[strcspn(biblioteca[totalLivros].nome, "\n")] = '\0';
+                    biblioteca[totalLivros].autor[strcspn(biblioteca[totalLivros].autor, "\n")] = '\0';
+                    biblioteca[totalLivros].editora[strcspn(biblioteca[totalLivros].editora, "\n")] = '\0';
+
+                    printf("Digite a edicao: ");
+                    scanf("%d", &biblioteca[totalLivros].edicao);
+                    limparBufferEntrada();
+
+                    totalLivros++;
+                    // que é igual a usar  totalLivros = totalLivros +1;
+
+                    printf("\nLivro cadastrado com sucesso!\n");
+                } else {
+                    printf("Biblioteca cheia! Não é possível cadastrar mais livros.\n");
+                }
+
+                printf("\nPressione Enter para continuar...");
+                getchar(); // Pausa para o usuário ler a mensagem antes de voltar ao menu.
+                break;
+
+            case 2: //Listagem de Livros
+                printf("--- Lista  de Livros Cadastrados ---\n\n");
+
+                if (totalLivros == 0) {
+                    printf("Nenhum livro cadastrado ainda.\n");
+                } else {
+                    for (int i = 0; i < totalLivros; i++) {
+                        printf("---------------------------------------\n");
+                        printf("LIVRO %d\n", i + 1);
+                        printf("Nome: %s\n", biblioteca[i].nome);
+                        printf("Autor: %s\n", biblioteca[i].autor);
+                        printf("Editora: %s\n", biblioteca[i].editora);
+                        printf("Edição: %d\n", biblioteca[i].edicao);
+                    }
+                     printf("-------------------------------------------\n");
+                }
+
+                // A pausa é crucial para que o usuário veja a lista antes 
+                // do proximo loop limpara a tela.
+                printf("\nPressione Enter para continuar...");
+                getchar();
+                break;
+
+
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
+            case 0: //Sair
+                printf("\nSaindo do sistema...\n");
+                break;
+
+            default: // Opção Inválida
+                printf("\nOpção Inválida! Tente novamente. \n");
+                printf("\nPressione Enter para continuar...");
+                getchar();
+                break;   
+        }
+
+    } while (opcao != 0);
 
     return 0;
 }
