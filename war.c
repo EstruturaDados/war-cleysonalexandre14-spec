@@ -16,22 +16,20 @@
 
 // Inclusão das bibliotecas padrão necessárias para entrada/saída, alocação de memória, manipulação de strings e tempo.
 #include <stdio.h>
-#include <stdlib.h> //
 #include <string.h> // Para strcspn()
 
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
 
 #define MAX_TERRITORIOS 5
-#define TAM_STRING 100
 
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
 
-struct Territorios {
-    char Nome[TAM_STRING];
-    char Cor[TAM_STRING];
-    int numero;
+struct Territorio {
+    char Nome[30];
+    char Cor[10];
+    int tropas;
 };
 
 // --- Protótipos das Funções ---
@@ -51,7 +49,7 @@ void limparBufferEntrada() {
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
 int main() {
     // 1. Configuração Inicial (Setup):
-    struct Territorios biblioteca[MAX_TERRITORIOS];
+    struct Territorio territorios[MAX_TERRITORIOS];
     int totalTerritorios = 0;
     int opcao;
 
@@ -77,8 +75,8 @@ int main() {
         printf("===================================================\n");
         printf("     DESAFIO WAR - NOVATO\n");
         printf("===================================================\n");
-        printf("1 - Cadastrar novo livro\n");
-        printf("2 - Listar todos os livros\n");
+        printf("1 - Cadastrar novo Territorio\n");
+        printf("2 - Listar todos os Territorios\n");
         printf("0 - Sair\n");
         printf("---------------------------------------------------\n");
         printf("Escolha uma opcao: ");
@@ -89,12 +87,12 @@ int main() {
 
         // --- Processamento da Opção ---
         switch (opcao) {
-            case 1: // Cadastro de Livro
-                printf("--- Cadastro de Novo Livro ---\n\n");
+            case 1: // Cadastro de Territorio
+                printf("--- Cadastro de Novo Territorio ---\n\n");
 
-                if (totalLivros < MAX_LIVROS) {
-                    printf("Digite o nome do livro: ");
-                    fgets(biblioteca[totalLivros].nome, TAM_STRING, stdin);
+                if (totalTerritorios < MAX_TERRITORIOS) {
+                    printf("Digite o nome do Territorio: ");
+                    fgets(war[totalTerritorios].nome, TAM_STRING, stdin);
 
                     printf("Digite o autor: ");
                     fgets(biblioteca[totalLivros].autor, TAM_STRING, stdin);
