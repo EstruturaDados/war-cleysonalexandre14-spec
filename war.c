@@ -27,8 +27,8 @@
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
 
 struct Territorio {
-    char Nome[30];
-    char Cor[10];
+    char nome[30];
+    char cor[10];
     int tropas;
 };
 
