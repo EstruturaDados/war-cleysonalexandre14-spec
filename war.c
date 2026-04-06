@@ -72,15 +72,15 @@ int main() {
     do {
 
         // Exibe o menu de opções.
-        printf("===================================================\n");
-        printf("     DESAFIO WAR - NOVATO\n");
-        printf("===================================================\n");
-        printf("1 - Cadastrar novo Territorio\n");
-        printf("2 - Listar todos os Territorios\n");
+        printf("=====================================\n");
+        printf("        DESAFIO WAR - NOVATO\n");
+        printf("=====================================\n");
+        printf("1 - Cadastrar territorio\n");
+        printf("2 - Listar territorios\n");
         printf("0 - Sair\n");
-        printf("---------------------------------------------------\n");
+        printf("-------------------------------------\n");
         printf("Escolha uma opcao: ");
-
+       
     // Lê a opção do usuário.
         scanf("%d", &opcao);
         limparBufferEntrada(); // Limpa o '\n' deixado pelo scanf.
@@ -88,53 +88,51 @@ int main() {
         // --- Processamento da Opção ---
         switch (opcao) {
             case 1: // Cadastro de Territorio
-                printf("--- Cadastro de Novo Territorio ---\n\n");
+                 printf("\n--- Cadastro de Novo Territorio ---\n\n");
 
                 if (totalTerritorios < MAX_TERRITORIOS) {
-                    printf("Digite o nome do Territorio: ");
-                    fgets(war[totalTerritorios].nome, TAM_STRING, stdin);
 
-                    printf("Digite o autor: ");
-                    fgets(biblioteca[totalLivros].autor, TAM_STRING, stdin);
+                    printf("Digite o nome do territorio: ");
+                    fgets(territorios[totalTerritorios].nome, 30, stdin);
 
-                    printf("Digite a editora: ");
-                    fgets(biblioteca[totalLivros].editora, TAM_STRING, stdin);
+                    printf("Digite a cor do exercito: ");
+                    fgets(territorios[totalTerritorios].cor, 10, stdin);
 
-                    biblioteca[totalLivros].nome[strcspn(biblioteca[totalLivros].nome, "\n")] = '\0';
-                    biblioteca[totalLivros].autor[strcspn(biblioteca[totalLivros].autor, "\n")] = '\0';
-                    biblioteca[totalLivros].editora[strcspn(biblioteca[totalLivros].editora, "\n")] = '\0';
-
-                    printf("Digite a edicao: ");
-                    scanf("%d", &biblioteca[totalLivros].edicao);
+                    printf("Digite a quantidade de tropas: ");
+                    scanf("%d", &territorios[totalTerritorios].tropas);
                     limparBufferEntrada();
 
-                    totalLivros++;
-                    // que é igual a usar  totalLivros = totalLivros +1;
+                    // Remove '\n'
+                    territorios[totalTerritorios].nome[strcspn(territorios[totalTerritorios].nome, "\n")] = '\0';
+                    territorios[totalTerritorios].cor[strcspn(territorios[totalTerritorios].cor, "\n")] = '\0';
 
-                    printf("\nLivro cadastrado com sucesso!\n");
+                    totalTerritorios++;
+                    //Poderia ser usado totalTerritorios = totalTerritorios +1;
+
+                    printf("\nTerritorio cadastrado com sucesso!\n");
+
                 } else {
-                    printf("Biblioteca cheia! Não é possível cadastrar mais livros.\n");
+                    printf("Limite de territorios atingido!\n");
                 }
 
                 printf("\nPressione Enter para continuar...");
-                getchar(); // Pausa para o usuário ler a mensagem antes de voltar ao menu.
+                getchar();
                 break;
 
-            case 2: //Listagem de Livros
-                printf("--- Lista  de Livros Cadastrados ---\n\n");
+            case 2: // Listagem
+                printf("\n--- Lista de Territorios ---\n\n");
 
-                if (totalLivros == 0) {
-                    printf("Nenhum livro cadastrado ainda.\n");
+                if (totalTerritorios == 0) {
+                    printf("Nenhum territorio cadastrado ainda.\n");
                 } else {
-                    for (int i = 0; i < totalLivros; i++) {
-                        printf("---------------------------------------\n");
-                        printf("LIVRO %d\n", i + 1);
-                        printf("Nome: %s\n", biblioteca[i].nome);
-                        printf("Autor: %s\n", biblioteca[i].autor);
-                        printf("Editora: %s\n", biblioteca[i].editora);
-                        printf("Edição: %d\n", biblioteca[i].edicao);
+                    for (int i = 0; i < totalTerritorios; i++) {
+                        printf("-------------------------------------\n");
+                        printf("Territorio %d\n", i + 1);
+                        printf("Nome: %s\n", territorios[i].nome);
+                        printf("Exercito (cor): %s\n", territorios[i].cor);
+                        printf("Tropas: %d\n", territorios[i].tropas);
                     }
-                     printf("-------------------------------------------\n");
+                    printf("-------------------------------------\n");
                 }
 
                 // A pausa é crucial para que o usuário veja a lista antes 
@@ -143,25 +141,23 @@ int main() {
                 getchar();
                 break;
 
-
-    // 3. Limpeza:
-    // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
-            case 0: //Sair
+                // 3. Limpeza:
+               // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
+            case 0:
                 printf("\nSaindo do sistema...\n");
                 break;
 
-            default: // Opção Inválida
-                printf("\nOpção Inválida! Tente novamente. \n");
+            default:
+                printf("\nOpcao invalida!\n");
                 printf("\nPressione Enter para continuar...");
                 getchar();
-                break;   
+                break;
         }
 
     } while (opcao != 0);
 
     return 0;
-}
-
+}    
 // --- Implementação das Funções ---
 
 // alocarMapa():
